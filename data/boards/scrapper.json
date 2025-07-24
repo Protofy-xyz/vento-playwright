@@ -7,7 +7,7 @@
             "width": 2,
             "height": 8,
             "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardAction({ data, mode: \"full\" })}\n    `\n});\n",
-            "name": "open browser",
+            "name": "Open Browser",
             "color": "#45ba4b",
             "description": "open playwright browser",
             "rulesCode": "return execute_action(\"/api/v1/playwright/open-browser\", { });",
@@ -22,7 +22,7 @@
             "width": 2,
             "height": 8,
             "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
-            "name": "navigate",
+            "name": "Navigate",
             "color": "#0a4481",
             "description": "navigate playwright browser",
             "rulesCode": "return execute_action(\"/api/v1/playwright/navigate\", { url: userParams.url });",
@@ -32,14 +32,21 @@
             "type": "action",
             "buttonLabel": "Navigate",
             "displayIcon": false,
-            "displayResponse": true
+            "displayResponse": true,
+            "configParams": {
+                "url": {
+                    "visible": true,
+                    "defaultValue": "https://github.com/topics/llm",
+                    "type": "string"
+                }
+            }
         },
         {
             "key": "action_1753276510670",
             "width": 2,
             "height": 8,
             "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardAction({ data, mode: \"full\" })}\n    `\n});\n",
-            "name": "close browser",
+            "name": "Close Browser",
             "color": "#d65348",
             "description": "close playwright browser",
             "rulesCode": "return execute_action(\"/api/v1/playwright/close-browser\", { });",
@@ -74,20 +81,50 @@
             "name": "Palywright JS Action",
             "color": "#0a4481",
             "description": "navigate playwright browser",
-            "rulesCode": "return execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message });",
+            "rulesCode": "const message = `\r\nconst repos = await page.locator('article').evaluateAll(cards => {\r\n        return cards.map(card => {\r\n                const nameEl = card.querySelector('h3 a');\r\n\r\n                const url = nameEl?.href;\r\n                const name = nameEl?.innerText?.trim();\r\n\r\n                \r\n                const language = card.querySelector('[itemprop=\"programmingLanguage\"]')?.innerText?.trim();\r\n                \r\n                const starsSpan = card.querySelector('span.Counter[aria-label*=\"starred\"]');\r\n                const starsRaw = starsSpan?.textContent?.trim() || '0';\r\n\r\n                const stars = (() => {\r\n                const cleaned = starsRaw.replace(',', '').toLowerCase();\r\n                if (cleaned.endsWith('k')) return Math.round(parseFloat(cleaned) * 1000);\r\n                if (cleaned.endsWith('m')) return Math.round(parseFloat(cleaned) * 1000000);\r\n                return parseInt(cleaned) || 0;\r\n                })();\r\n                \r\n                return { name, url, language, stars };\r\n        });\r\n});\r\n\r\nreturn repos;`\r\n\r\nreturn execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message ?? message });",
             "params": {
                 "message": "message"
             },
             "type": "action",
-            "buttonLabel": "Send",
+            "buttonLabel": "Get Github Repositories",
             "displayIcon": false,
             "displayResponse": true,
             "configParams": {
                 "message": {
-                    "visible": true,
+                    "visible": false,
                     "defaultValue": "",
-                    "type": "string"
+                    "type": "text"
                 }
+            }
+        },
+        {
+            "key": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+            "width": 2,
+            "height": 8,
+            "icon": "chart-column",
+            "html": "\n\nreactCard(`\n  function Widget(props) {\n    const aspect = useCardAspectRatio('${data.domId}')\n    return (\n      <View className=\"no-drag\">\n        <BarChart\n          colors={chartColors}\n          title={\"players score\"}\n          id={\"barchart\"}\n          data={props.value}\n          dataKey={props.params.dataKey}\n          nameKey={props.params.nameKey}\n          isAnimationActive={false}\n          aspect={aspect}\n        />\n      </View>\n    );\n  }\n`, data.domId, data)\n        \n        ",
+            "name": "Stars",
+            "description": "Displays a bar chart using Recharts",
+            "type": "value",
+            "params": {
+                "nameKey": "name",
+                "dataKey": "value"
+            },
+            "rulesCode": "return (() => {\r\n  const res = board?.['Palywright JS Action'];\r\n\r\n  const table = {}\r\n\r\n  const result = res.map(item => ({\r\n    name: item.name,\r\n    value: item.stars\r\n  }))\r\n\r\n  return result;\r\n})();"
+        },
+        {
+            "key": "value_1753374859382",
+            "width": 2.5,
+            "height": 10,
+            "icon": "chart-pie",
+            "html": "\n\nreactCard(`\n  function Widget(props) {\n    const aspect = useCardAspectRatio('${data.domId}')\n    return (\n          <View className=\"no-drag\">\n            <PieChart\n              colors={chartColors}\n              title={\"players score\"}\n              id={\"piechart\"}\n              data={props.value}\n              dataKey={props.params.dataKey}\n              nameKey={props.params.nameKey}\n              isAnimationActive={false}\n              aspect={aspect}\n            />\n          </View>\n    );\n  }\n\n`, data.domId, data)\n\n\n\n            ",
+            "name": "Languages",
+            "description": "Displays a pie chart using Recharts",
+            "rulesCode": "return (() => {\r\n  const res = board?.['Palywright JS Action'];\r\n\r\n  const table = {}\r\n\r\n  res.forEach(item => {\r\n    table[item.language] = (table[item.language] ?? 0) + 1\r\n  })\r\n\r\n  const result = Object.keys(table).map(k => ({\r\n    name: k,\r\n    value: table[k]\r\n  }))\r\n\r\n  return result;\r\n})();",
+            "type": "value",
+            "params": {
+                "nameKey": "name",
+                "dataKey": "value"
             }
         }
     ],
@@ -106,7 +143,7 @@
             },
             {
                 "w": 6,
-                "h": 14,
+                "h": 7,
                 "x": 0,
                 "y": 3,
                 "i": "action_1753275232639",
@@ -126,8 +163,8 @@
             },
             {
                 "w": 8,
-                "h": 17,
-                "x": 6,
+                "h": 10,
+                "x": 14,
                 "y": 0,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
                 "moved": false,
@@ -136,10 +173,30 @@
             },
             {
                 "w": 8,
-                "h": 17,
-                "x": 14,
+                "h": 10,
+                "x": 6,
                 "y": 0,
                 "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 14,
+                "h": 11,
+                "x": 8,
+                "y": 10,
+                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 8,
+                "h": 11,
+                "x": 0,
+                "y": 10,
+                "i": "value_1753374859382",
                 "moved": false,
                 "static": false,
                 "isResizable": true
@@ -195,6 +252,22 @@
                 "moved": false,
                 "static": false,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "x": 0,
+                "y": 0,
+                "w": 5,
+                "h": 9,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753374859382",
+                "x": 0,
+                "y": 0,
+                "w": 7,
+                "h": 11,
+                "isResizable": true
             }
         ],
         "sm": [
@@ -247,6 +320,22 @@
                 "moved": false,
                 "static": false,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "x": 0,
+                "y": 0,
+                "w": 1,
+                "h": 9,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753374859382",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 11,
+                "isResizable": true
             }
         ],
         "xs": [
@@ -298,6 +387,22 @@
                 "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "x": 0,
+                "y": 0,
+                "w": 1,
+                "h": 9,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753374859382",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 11,
                 "isResizable": true
             }
         ]
