@@ -1,0 +1,241 @@
+{
+    "name": "scrapper",
+    "icon": "venetian-mask",
+    "cards": [
+        {
+            "key": "action_1753274431392",
+            "width": 2,
+            "height": 8,
+            "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardAction({ data, mode: \"full\" })}\n    `\n});\n",
+            "name": "open browser",
+            "color": "#45ba4b",
+            "description": "open playwright browser",
+            "rulesCode": "return execute_action(\"/api/v1/playwright/open-browser\", { });",
+            "params": {},
+            "type": "action",
+            "buttonLabel": "Open",
+            "displayIcon": false,
+            "displayResponse": false
+        },
+        {
+            "key": "action_1753275232639",
+            "width": 2,
+            "height": 8,
+            "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
+            "name": "navigate",
+            "color": "#0a4481",
+            "description": "navigate playwright browser",
+            "rulesCode": "return execute_action(\"/api/v1/playwright/navigate\", { url: userParams.url });",
+            "params": {
+                "url": "url"
+            },
+            "type": "action",
+            "buttonLabel": "Navigate",
+            "displayIcon": false,
+            "displayResponse": true
+        },
+        {
+            "key": "action_1753276510670",
+            "width": 2,
+            "height": 8,
+            "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardAction({ data, mode: \"full\" })}\n    `\n});\n",
+            "name": "close browser",
+            "color": "#d65348",
+            "description": "close playwright browser",
+            "rulesCode": "return execute_action(\"/api/v1/playwright/close-browser\", { });",
+            "params": {},
+            "type": "action",
+            "buttonLabel": "Close",
+            "displayIcon": false,
+            "displayResponse": false
+        },
+        {
+            "key": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+            "width": 2,
+            "height": 8,
+            "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
+            "name": "AI browser action",
+            "color": "#0a4481",
+            "description": "navigate playwright browser",
+            "rulesCode": "return execute_action(\"/api/v1/playwright/ai-action\", { prompt: userParams.prompt });",
+            "params": {
+                "prompt": "prompt"
+            },
+            "type": "action",
+            "buttonLabel": "Send",
+            "displayIcon": false,
+            "displayResponse": true
+        }
+    ],
+    "autopilot": false,
+    "layouts": {
+        "lg": [
+            {
+                "w": 2,
+                "h": 3,
+                "x": 0,
+                "y": 0,
+                "i": "action_1753274431392",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 7,
+                "h": 8,
+                "x": 0,
+                "y": 3,
+                "i": "action_1753275232639",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 3,
+                "x": 2,
+                "y": 0,
+                "i": "action_1753276510670",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 9,
+                "h": 18,
+                "x": 7,
+                "y": 0,
+                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            }
+        ],
+        "md": [
+            {
+                "w": 5,
+                "h": 3,
+                "x": 0,
+                "y": 0,
+                "i": "action_1753274431392",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 14,
+                "h": 6,
+                "x": 0,
+                "y": 20,
+                "i": "action_1753275232639",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 5,
+                "h": 3,
+                "x": 5,
+                "y": 0,
+                "i": "action_1753276510670",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 24,
+                "h": 17,
+                "x": 0,
+                "y": 3,
+                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            }
+        ],
+        "sm": [
+            {
+                "w": 1,
+                "h": 4,
+                "x": 0,
+                "y": 0,
+                "i": "action_1753274431392",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 6,
+                "x": 0,
+                "y": 20,
+                "i": "action_1753275232639",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 1,
+                "h": 4,
+                "x": 1,
+                "y": 0,
+                "i": "action_1753276510670",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 16,
+                "x": 0,
+                "y": 4,
+                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            }
+        ],
+        "xs": [
+            {
+                "w": 1,
+                "h": 4,
+                "x": 0,
+                "y": 0,
+                "i": "action_1753274431392",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 6,
+                "x": 0,
+                "y": 13,
+                "i": "action_1753275232639",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 1,
+                "h": 4,
+                "x": 1,
+                "y": 0,
+                "i": "action_1753276510670",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 9,
+                "x": 0,
+                "y": 4,
+                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            }
+        ]
+    }
+}
