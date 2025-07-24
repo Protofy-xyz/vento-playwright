@@ -53,6 +53,17 @@ export default (app, context) => {
             token: await getServiceToken()
         })
 
+        addAction({
+            group: 'playwright',
+            name: 'js-action',
+            url: `/api/v1/playwright/js-action`,
+            tag: "jsAction",
+            description: "do a playwright action using js",
+            params: { message: "your js message here" },
+            emitEvent: true,
+            token: await getServiceToken()
+        })
+
     }
 
     const registerCards = async (context) => {
@@ -222,7 +233,7 @@ export default (app, context) => {
         jsCode = ai.cleanCode(reply.choices[0].message.content)
 
 
-        try {   
+        try {
             const fn = new Function('page', 'context', `
                 (async () => {
                     ${jsCode}
@@ -237,6 +248,35 @@ export default (app, context) => {
         console.log('DEV: AI jsCodeRes:', jsCodeRes);
 
         res.json(jsCodeRes ?? jsCode);
+    }))
+
+    app.get("/api/v1/playwright/js-action", handler(async (req, res, session) => {
+        if (!session || !session.user.admin) {
+            res.status(401).send({ error: "Unauthorized" })
+            return
+        }
+
+        const { message: userMessage } = req.query;
+
+        if (!userMessage) {
+            res.status(400).send({ error: "Message parameter is required" });
+            return;
+        }
+
+        let jsCodeRes = "";
+
+        try {
+            const fn = new Function('page', 'context', `
+                    return (async () => {
+                        ${userMessage}
+                    })();
+            `);
+            jsCodeRes = await fn(playwrightPage, context);
+        } catch (error) {
+            console.error({ error }, `Error executing Playwright code: ${userMessage}`);
+        }
+
+        res.json(jsCodeRes);
     }))
 
     registerActions(context);
