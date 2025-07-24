@@ -214,10 +214,10 @@
                 "isResizable": true
             },
             {
-                "w": 14,
-                "h": 6,
+                "w": 10,
+                "h": 7,
                 "x": 0,
-                "y": 38,
+                "y": 3,
                 "i": "action_1753275232639",
                 "moved": false,
                 "static": false,
@@ -234,39 +234,43 @@
                 "isResizable": true
             },
             {
-                "w": 22,
-                "h": 17,
-                "x": 0,
-                "y": 21,
+                "w": 14,
+                "h": 10,
+                "x": 10,
+                "y": 0,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
                 "moved": false,
                 "static": false,
                 "isResizable": true
             },
             {
-                "w": 21,
-                "h": 18,
-                "x": 0,
-                "y": 3,
+                "w": 12,
+                "h": 10,
+                "x": 12,
+                "y": 10,
                 "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
                 "isResizable": true
             },
             {
-                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "w": 24,
+                "h": 12,
                 "x": 0,
-                "y": 0,
-                "w": 5,
-                "h": 9,
+                "y": 20,
+                "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
+                "moved": false,
+                "static": false,
                 "isResizable": true
             },
             {
-                "i": "value_1753374859382",
+                "w": 12,
+                "h": 10,
                 "x": 0,
-                "y": 0,
-                "w": 7,
-                "h": 11,
+                "y": 10,
+                "i": "value_1753374859382",
+                "moved": false,
+                "static": false,
                 "isResizable": true
             }
         ],
