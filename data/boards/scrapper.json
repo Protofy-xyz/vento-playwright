@@ -65,6 +65,30 @@
             "buttonLabel": "Send",
             "displayIcon": false,
             "displayResponse": true
+        },
+        {
+            "key": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
+            "width": 2,
+            "height": 8,
+            "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
+            "name": "Palywright JS Action",
+            "color": "#0a4481",
+            "description": "navigate playwright browser",
+            "rulesCode": "return execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message });",
+            "params": {
+                "message": "message"
+            },
+            "type": "action",
+            "buttonLabel": "Send",
+            "displayIcon": false,
+            "displayResponse": true,
+            "configParams": {
+                "message": {
+                    "visible": true,
+                    "defaultValue": "",
+                    "type": "string"
+                }
+            }
         }
     ],
     "autopilot": false,
@@ -81,8 +105,8 @@
                 "isResizable": true
             },
             {
-                "w": 7,
-                "h": 8,
+                "w": 6,
+                "h": 14,
                 "x": 0,
                 "y": 3,
                 "i": "action_1753275232639",
@@ -101,11 +125,21 @@
                 "isResizable": true
             },
             {
-                "w": 9,
-                "h": 18,
-                "x": 7,
+                "w": 8,
+                "h": 17,
+                "x": 6,
                 "y": 0,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 8,
+                "h": 17,
+                "x": 14,
+                "y": 0,
+                "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
                 "isResizable": true
@@ -126,7 +160,7 @@
                 "w": 14,
                 "h": 6,
                 "x": 0,
-                "y": 20,
+                "y": 38,
                 "i": "action_1753275232639",
                 "moved": false,
                 "static": false,
@@ -143,11 +177,21 @@
                 "isResizable": true
             },
             {
-                "w": 24,
+                "w": 22,
                 "h": 17,
                 "x": 0,
-                "y": 3,
+                "y": 21,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 21,
+                "h": 18,
+                "x": 0,
+                "y": 3,
+                "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
                 "isResizable": true
@@ -168,7 +212,7 @@
                 "w": 2,
                 "h": 6,
                 "x": 0,
-                "y": 20,
+                "y": 33,
                 "i": "action_1753275232639",
                 "moved": false,
                 "static": false,
@@ -188,8 +232,18 @@
                 "w": 2,
                 "h": 16,
                 "x": 0,
-                "y": 4,
+                "y": 17,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 13,
+                "x": 0,
+                "y": 4,
+                "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
                 "isResizable": true
@@ -210,7 +264,7 @@
                 "w": 2,
                 "h": 6,
                 "x": 0,
-                "y": 13,
+                "y": 33,
                 "i": "action_1753275232639",
                 "moved": false,
                 "static": false,
@@ -228,10 +282,20 @@
             },
             {
                 "w": 2,
-                "h": 9,
+                "h": 16,
+                "x": 0,
+                "y": 17,
+                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 2,
+                "h": 13,
                 "x": 0,
                 "y": 4,
-                "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
+                "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
                 "isResizable": true
