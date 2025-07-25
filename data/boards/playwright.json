@@ -71,7 +71,14 @@
             "type": "action",
             "buttonLabel": "Send",
             "displayIcon": false,
-            "displayResponse": true
+            "displayResponse": true,
+            "configParams": {
+                "prompt": {
+                    "visible": true,
+                    "defaultValue": "",
+                    "type": "text"
+                }
+            }
         },
         {
             "key": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
@@ -116,7 +123,7 @@
                 "nameKey": "name",
                 "dataKey": "value"
             },
-            "rulesCode": "return (() => {\r\n  const res = board?.['Palywright JS Action'];\r\n\r\n  const table = {}\r\n\r\n  const result = res.map(item => ({\r\n    name: item.name,\r\n    value: item.stars\r\n  }))\r\n\r\n  return result;\r\n})();"
+            "rulesCode": "return (() => {\r\n  const res = board?.['Get Github Repositories']\r\n\r\n  const table = {}\r\n\r\n  const result = res.map(item => ({\r\n    name: item.name,\r\n    value: item.stars\r\n  }))\r\n\r\n  return result;\r\n})();"
         },
         {
             "key": "value_1753374859382",
@@ -126,7 +133,7 @@
             "html": "\n\nreactCard(`\n  function Widget(props) {\n    const aspect = useCardAspectRatio('${data.domId}')\n    return (\n          <View className=\"no-drag\">\n            <PieChart\n              colors={chartColors}\n              title={\"players score\"}\n              id={\"piechart\"}\n              data={props.value}\n              dataKey={props.params.dataKey}\n              nameKey={props.params.nameKey}\n              isAnimationActive={false}\n              aspect={aspect}\n            />\n          </View>\n    );\n  }\n\n`, data.domId, data)\n\n\n\n            ",
             "name": "Languages",
             "description": "Displays a pie chart using Recharts",
-            "rulesCode": "return (() => {\r\n  const res = board?.['Palywright JS Action'];\r\n\r\n  const table = {}\r\n\r\n  res.forEach(item => {\r\n    table[item.language] = (table[item.language] ?? 0) + 1\r\n  })\r\n\r\n  const result = Object.keys(table).map(k => ({\r\n    name: k,\r\n    value: table[k]\r\n  }))\r\n\r\n  return result;\r\n})();",
+            "rulesCode": "return (() => {\r\n  const res = board?.['Get Github Repositories']\r\n\r\n  const table = {}\r\n\r\n  res.forEach(item => {\r\n    table[item.language] = (table[item.language] ?? 0) + 1\r\n  })\r\n\r\n  const result = Object.keys(table).map(k => ({\r\n    name: k,\r\n    value: table[k]\r\n  }))\r\n\r\n  return result;\r\n})();",
             "type": "value",
             "params": {
                 "nameKey": "name",
@@ -142,9 +149,30 @@
             "name": "Read Me",
             "description": "Render formatted markdown using ReactMarkdown",
             "type": "value",
-            "rulesCode": "return `### What's this? \n\n# 🧪 Playwright AI Browser Board\n\nThis is an example of a smart automation board using **Playwright**:\n\n1. 🔍 Fetches top GitHub repositories by topic.\n2. 🤖 Controls Chromium using natural language via an AI Browser Action Card.\n\nPerfect for ethical scraping, automation demos, AI agents, or browser copilots.\n\n---\n\n## 🚀 Requirements\n\n- Chromium`",
+            "rulesCode": "return `### What's this? \n\n# 🧪 Playwright AI Browser Board\n\nThis is an example of a smart automation board using **Playwright**:\n\n1. 🔍 Fetches top GitHub repositories by topic.\n2. 🤖 Controls Chromium using natural language via an AI Browser Action Card.\n\nPerfect for ethical scraping, automation demos, AI agents, or browser copilots.\n\n---\n\n## 🚀 Requirements\n\n    - Chromium installed\n    - OPENAI_API_KEY added to keys section`",
             "editorOptions": {
                 "defaultTab": "value"
+            }
+        },
+        {
+            "key": "value_1753434972314",
+            "width": 4,
+            "height": 4,
+            "icon": "key",
+            "html": "\n//@react\nreactCard(`\n  async function validateKey(apiKey) {\n   // return true or false if the key is valid or not\n    return true;\n  }\n\n  function Widget() {\n    return (\n          <View className=\"no-drag\">\n            <KeySetter\n              nameKey={data?.configParams?.nameKey?.defaultValue}\n              validate={validateKey}\n              onAdd={(key) => {\n                // alert(\"add: \"+key)\n              }}\n              onRemove={(key) => {\n                // alert(\"remove: \"+key)\n              }}\n            />\n          </View>\n    );\n  }\n\n`, data.domId)\n\n            ",
+            "name": "Key Setter",
+            "description": "Displays a key setter for a specific key or in case already set displays key is set",
+            "type": "value",
+            "rulesCode": "",
+            "params": {
+                "nameKey": "The key name to set"
+            },
+            "configParams": {
+                "nameKey": {
+                    "visible": true,
+                    "defaultValue": "OPENAI_API_KEY",
+                    "type": "string"
+                }
             }
         }
     ],
@@ -163,7 +191,7 @@
             },
             {
                 "w": 8,
-                "h": 6,
+                "h": 8,
                 "x": 0,
                 "y": 3,
                 "i": "action_1753275232639",
@@ -183,7 +211,7 @@
             },
             {
                 "w": 7,
-                "h": 9,
+                "h": 11,
                 "x": 15,
                 "y": 0,
                 "i": "action_1753275232639_vento_copy_7rj5xpu4q47ose3xm6hye",
@@ -193,9 +221,9 @@
             },
             {
                 "w": 7,
-                "h": 9,
+                "h": 8,
                 "x": 8,
-                "y": 0,
+                "y": 3,
                 "i": "action_1753275232639_vento_copy_f5egvvk9tdo7iv4gg9t0f",
                 "moved": false,
                 "static": false,
@@ -205,7 +233,7 @@
                 "w": 14,
                 "h": 11,
                 "x": 8,
-                "y": 9,
+                "y": 11,
                 "i": "value_1753367745305_vento_copy_tth1unvstwpkt11iv8w5p",
                 "moved": false,
                 "static": false,
@@ -215,7 +243,7 @@
                 "w": 8,
                 "h": 11,
                 "x": 0,
-                "y": 9,
+                "y": 11,
                 "i": "value_1753374859382",
                 "moved": false,
                 "static": false,
@@ -227,6 +255,16 @@
                 "x": 4,
                 "y": 0,
                 "i": "value_1753431052431",
+                "moved": false,
+                "static": false,
+                "isResizable": true
+            },
+            {
+                "w": 7,
+                "h": 3,
+                "x": 8,
+                "y": 0,
+                "i": "value_1753434972314",
                 "moved": false,
                 "static": false,
                 "isResizable": true
@@ -310,6 +348,14 @@
                 "w": 8,
                 "h": 14,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753434972314",
+                "x": 0,
+                "y": 0,
+                "w": 10,
+                "h": 5,
+                "isResizable": true
             }
         ],
         "sm": [
@@ -386,6 +432,14 @@
                 "w": 2,
                 "h": 14,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753434972314",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 5,
+                "isResizable": true
             }
         ],
         "xs": [
@@ -461,6 +515,14 @@
                 "y": 0,
                 "w": 2,
                 "h": 14,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753434972314",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 5,
                 "isResizable": true
             }
         ]
