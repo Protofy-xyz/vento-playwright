@@ -492,7 +492,7 @@ const cardValue = ({ value, style = '', id = null }) => {
     }
     return `
         <div ${id ? 'id="' + id + '"' : ''} style="
-            height: ${fullHeight ? '100%' : 'auto'};
+            height: 100%;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -502,6 +502,7 @@ const cardValue = ({ value, style = '', id = null }) => {
             font-weight: bold;
             margin-top: 20px;
             white-space: pre-wrap;
+            overflow: auto;
             ${style}           
         ">${value}</div>
     `;
