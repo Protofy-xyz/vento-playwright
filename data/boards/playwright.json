@@ -78,16 +78,16 @@
             "width": 2,
             "height": 8,
             "html": "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
-            "name": "Palywright JS Action",
+            "name": "Get Github Repositories",
             "color": "#0a4481",
             "description": "navigate playwright browser",
-            "rulesCode": "let prev = `await page.goto('https://github.com/topics/${userParams.topic ?? \"llm\"}')`\r\n\r\nconst message = `\r\n${prev}\r\nconst repos = await page.locator('article').evaluateAll(cards => {\r\n        return cards.map(card => {\r\n                const nameEl = card.querySelector('h3 a');\r\n\r\n                const url = nameEl?.href;\r\n                const name = nameEl?.innerText?.trim();\r\n\r\n                \r\n                const language = card.querySelector('[itemprop=\"programmingLanguage\"]')?.innerText?.trim();\r\n                \r\n                const starsSpan = card.querySelector('span.Counter[aria-label*=\"starred\"]');\r\n                const starsRaw = starsSpan?.textContent?.trim() || '0';\r\n\r\n                const stars = (() => {\r\n                const cleaned = starsRaw.replace(',', '').toLowerCase();\r\n                if (cleaned.endsWith('k')) return Math.round(parseFloat(cleaned) * 1000);\r\n                if (cleaned.endsWith('m')) return Math.round(parseFloat(cleaned) * 1000000);\r\n                return parseInt(cleaned) || 0;\r\n                })();\r\n                \r\n                return { name, url, language, stars };\r\n        });\r\n});\r\n\r\nreturn repos;\r\n`\r\n\r\nreturn execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message ?? message });",
+            "rulesCode": "const message = `\r\nawait page.goto('https://github.com/topics/${userParams.topic ?? \"llm\"}')\r\nconst repos = await page.locator('article').evaluateAll(cards => {\r\n        return cards.map(card => {\r\n                const nameEl = card.querySelector('h3 a');\r\n\r\n                const url = nameEl?.href;\r\n                const name = nameEl?.innerText?.trim();\r\n\r\n                \r\n                const language = card.querySelector('[itemprop=\"programmingLanguage\"]')?.innerText?.trim();\r\n                \r\n                const starsSpan = card.querySelector('span.Counter[aria-label*=\"starred\"]');\r\n                const starsRaw = starsSpan?.textContent?.trim() || '0';\r\n\r\n                const stars = (() => {\r\n                const cleaned = starsRaw.replace(',', '').toLowerCase();\r\n                if (cleaned.endsWith('k')) return Math.round(parseFloat(cleaned) * 1000);\r\n                if (cleaned.endsWith('m')) return Math.round(parseFloat(cleaned) * 1000000);\r\n                return parseInt(cleaned) || 0;\r\n                })();\r\n                \r\n                return { name, url, language, stars };\r\n        });\r\n});\r\n\r\nreturn repos;\r\n`\r\n\r\nreturn execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message ?? message });",
             "params": {
                 "message": "message",
                 "topic": "topic"
             },
             "type": "action",
-            "buttonLabel": "Get Github Repositories",
+            "buttonLabel": "Get",
             "displayIcon": false,
             "displayResponse": true,
             "configParams": {
@@ -131,6 +131,20 @@
             "params": {
                 "nameKey": "name",
                 "dataKey": "value"
+            }
+        },
+        {
+            "key": "value_1753431052431",
+            "width": 3,
+            "height": 12,
+            "icon": "file-text",
+            "html": "//@react\nreturn markdown(data)",
+            "name": "Read Me",
+            "description": "Render formatted markdown using ReactMarkdown",
+            "type": "value",
+            "rulesCode": "return `### What's this? \n\n# 🧪 Playwright AI Browser Board\n\nThis is an example of a smart automation board using **Playwright**:\n\n1. 🔍 Fetches top GitHub repositories by topic.\n2. 🤖 Controls Chromium using natural language via an AI Browser Action Card.\n\nPerfect for ethical scraping, automation demos, AI agents, or browser copilots.\n\n---\n\n## 🚀 Requirements\n\n- Chromium`",
+            "editorOptions": {
+                "defaultTab": "value"
             }
         }
     ],
@@ -206,6 +220,16 @@
                 "moved": false,
                 "static": false,
                 "isResizable": true
+            },
+            {
+                "w": 4,
+                "h": 3,
+                "x": 4,
+                "y": 0,
+                "i": "value_1753431052431",
+                "moved": false,
+                "static": false,
+                "isResizable": true
             }
         ],
         "md": [
@@ -278,6 +302,14 @@
                 "moved": false,
                 "static": false,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753431052431",
+                "x": 0,
+                "y": 0,
+                "w": 8,
+                "h": 14,
+                "isResizable": true
             }
         ],
         "sm": [
@@ -346,6 +378,14 @@
                 "w": 2,
                 "h": 11,
                 "isResizable": true
+            },
+            {
+                "i": "value_1753431052431",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 14,
+                "isResizable": true
             }
         ],
         "xs": [
@@ -413,6 +453,14 @@
                 "y": 0,
                 "w": 2,
                 "h": 11,
+                "isResizable": true
+            },
+            {
+                "i": "value_1753431052431",
+                "x": 0,
+                "y": 0,
+                "w": 2,
+                "h": 14,
                 "isResizable": true
             }
         ]
