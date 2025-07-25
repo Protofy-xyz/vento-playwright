@@ -395,7 +395,7 @@ const paramsForm = ({ data }) => {
         >
             ${allKeys.map(key => {
         const cfg = data.configParams?.[key] || {};
-        const { visible = true, defaultValue = '' } = cfg;
+        const { visible = true, defaultValue = '', type = 'string'  } = cfg;
         const placeholder = data.params[key] ?? '';
 
         if (!visible) {
@@ -432,7 +432,24 @@ const paramsForm = ({ data }) => {
                             ">
                                 ${key}
                             </label>
-                            <input
+                            ${type == "text" 
+                            ? `<textarea
+                                    className="no-drag"
+                                    name="${key}"
+                                    style="
+                                        background-color: var(--gray1);
+                                        padding: 5px 10px;
+                                        border: 0.5px solid var(--gray7);
+                                        border-radius: 8px;
+                                        box-sizing: border-box;
+                                        minWidth: 100px;
+                                        resize: none;
+                                    "
+                                    defaultValue="${defaultValue}"
+                                    placeholder="${placeholder}"
+                                    rows="4"
+                                ></textarea>`
+                            : `<input
                                 class="no-drag"
                                 type="text"
                                 name="${key}"
@@ -447,7 +464,7 @@ const paramsForm = ({ data }) => {
                                 "
                                 value="${defaultValue}"
                                 placeholder="${placeholder}"
-                            >
+                            >`}
                         </div>
                     `;
     }).join('')
