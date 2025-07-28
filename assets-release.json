@@ -2,10 +2,7 @@
     {
         "name": "playwright",
         "files": [
-            "extensions/playwright/*",
-            "data/boards/playwright/*",
-            "data/boards/playwright.json",
-            "data/boards/playwright.js"
+            "extensions/playwright/*"
         ]
     }
 ]
