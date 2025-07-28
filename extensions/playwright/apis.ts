@@ -75,15 +75,17 @@ export default (app, context) => {
             name: "open_browser",
             defaults: {
                 width: 2,
-                height: 8,
+                height: 3,
                 name: "playwright_open_browser",
-                icon: "openai",
-                color: "#45BA4B",
+                icon: "globe",
+                color: "#45ba4b",
                 description: "open playwright browser",
                 rulesCode: `return execute_action("/api/v1/playwright/open-browser", { });`,
                 params: {},
                 type: 'action',
-                buttonLabel: "Open"
+                buttonLabel: "Open",
+                displayIcon: false,
+                displayResponse: false
             },
             emitEvent: true,
             token: await getServiceToken()
@@ -97,15 +99,17 @@ export default (app, context) => {
             name: "close_browser",
             defaults: {
                 width: 2,
-                height: 8,
+                height: 3,
                 name: "playwright_close_browser",
-                icon: "openai",
-                color: "#45BA4B",
+                icon: "power-off",
+                color: "#d65348",
                 description: "close playwright browser",
                 rulesCode: `return execute_action("/api/v1/playwright/close-browser", { });`,
                 params: {},
                 type: 'action',
-                buttonLabel: "Close"
+                buttonLabel: "Close",
+                displayIcon: false,
+                displayResponse: false
             },
             emitEvent: true,
             token: await getServiceToken()
@@ -118,11 +122,12 @@ export default (app, context) => {
             templateName: "playwright navigate",
             name: "navigate_browser",
             defaults: {
-                width: 2,
+                width: 3,
                 height: 8,
                 name: "playwright_navigate",
-                icon: "openai",
+                icon: "navigation",
                 color: "#45BA4B",
+                buttonLabel: "Navigate",
                 description: "navigate playwright browser",
                 rulesCode: `return execute_action("/api/v1/playwright/navigate", { url: userParams.url });`,
                 params: { url: "url" },
@@ -135,18 +140,58 @@ export default (app, context) => {
         addCard({
             group: 'playwright',
             tag: "browser",
-            id: 'playwright_browser_page',
-            templateName: "playwright browser page",
-            name: "response",
+            id: 'playwright_ai_action',
+            templateName: "playwright ai action",
+            name: "ai_action",
             defaults: {
-                width: 2,
-                height: 8,
-                name: "playwright_browser_page",
-                color: "#74AA9C",
-                description: "playwright browser page",
-                rulesCode: `return states?.playwright?.page?.content`,
-                type: 'value',
-                html: "return markdown(data)",
+                width: 3,
+                height: 9,
+                name: "playwright_ai_action",
+                icon: "wand",
+                color: "#45BA4B",
+                description: "playwright ai action",
+                rulesCode: `return execute_action(\"/api/v1/playwright/ai-action\", { prompt: userParams.prompt });`,
+                type: 'action',
+                buttonLabel: "Send",
+                params: { prompt: "prompt" },
+                configParams: {
+                    prompt: {
+                        visible: true,
+                        defaultValue: "",
+                        type: "text"
+                    }
+                },
+                html: "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
+            },
+            emitEvent: true,
+            token: await getServiceToken()
+        })
+
+        addCard({
+            group: 'playwright',
+            tag: "browser",
+            id: 'playwright_js_action',
+            templateName: "playwright js action",
+            name: "js_action",
+            defaults: {
+                width: 3,
+                height: 9,
+                name: "playwright_js_action",
+                icon: "file-code",
+                color: "#45BA4B",
+                description: "playwright js action",
+                rulesCode: "// message has access to current playwright page like \"await page.goto...\"\r\n// you can also return any value \r\n\r\nconst message = `\r\nawait page.goto('https://protofy.xyz')\r\n\r\nreturn \"Navigated to protofy.xyz\";\r\n`\r\n\r\nreturn execute_action(\"/api/v1/playwright/js-action\", { message: userParams.message ?? message });",
+                type: 'action',
+                buttonLabel: "Run",
+                params: { message: "message" },
+                configParams: {
+                    message: {
+                        visible: true,
+                        defaultValue: "",
+                        type: "text"
+                    }
+                },
+                html: "\n// data contains: data.icon, data.color, data.name, data.params\nreturn card({\n    content: `\n        ${cardIcon({ data, size: '48' })}\n        ${cardAction({ data })}\n    `\n});\n",
             },
             emitEvent: true,
             token: await getServiceToken()
