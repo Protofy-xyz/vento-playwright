@@ -1,0 +1,17 @@
+{
+    "name": "playwright",
+    "description": "Playwright asset for scrapping web pages in collaboration with AI",
+    "author_name": "protofy",
+    "version": "0.0.1",
+    "tags": [
+        "scrapper",
+        "playwright",
+        "ai"
+    ],
+    "packagedFiles": [
+        "data/boards/playwright/**",
+        "data/boards/playwright.json",
+        "data/boards/playwright.js",
+        "extensions/playwright/**"
+    ]
+}
